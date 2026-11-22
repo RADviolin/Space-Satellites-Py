@@ -7,8 +7,9 @@ This is my final project for a Python class. I want to:
 - I want to look at objects that pass within a chosen distance threshold.
 
 
+<img width="782" height="680" alt="image" src="https://github.com/user-attachments/assets/08514e81-8301-4cf2-8cc2-f7c66f7a00c1" />
 
-<img width="757" height="626" alt="image" src="https://github.com/user-attachments/assets/7a78b4a0-189a-4693-8c42-43f6f70bd727" />
+
 
 
 For simplicity, I'm considering the satellite to be a circle and using example values: orbital radius = 6500 km
@@ -25,5 +26,18 @@ y = r sin(theta)
 - r = distance from Earth's center
 - theta = satellite's angle around Earth
 - x and y = satellite's position
+
+
+Image is of my first visualization, 2D Earth, using NumPy and MatPlotLib
+
+
+
+
+
+
+
+
+
+
 
   Ni Sonnem
