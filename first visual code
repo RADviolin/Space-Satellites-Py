@@ -2,7 +2,7 @@ import math
 import matplotlib.pyplot as plt
 
 # Satellite information
-orbital_radius = 10000
+orbital_radius = 6500
 angle = 97
 
 # Calculate satellite position
