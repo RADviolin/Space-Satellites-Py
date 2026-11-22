@@ -1,1 +1,59 @@
 
+import matplotlib.animation as animation
+import math
+import matplotlib.pyplot as plt
+
+# Satellite information
+orbital_radius = 10000
+angle = 97
+
+# Calculate satellite position
+x = orbital_radius * math.cos(math.radians(angle))
+y = orbital_radius * math.sin(math.radians(angle))
+
+# Draw Earth
+earth = plt.Circle((0, 0), 6371, color="blue", label="Earth")
+
+fig, ax = plt.subplots()
+
+ax.add_patch(earth)
+
+# Draw satellite orbit
+orbit = plt.Circle((0, 0), orbital_radius,
+                   fill=False, color="gray",
+                    linestyle="--")
+
+ax.add_patch(orbit)
+
+# Draw satellite
+satellite, = ax.plot([], [], "ro", markersize=8, label="Satellite")
+
+def update(frame):
+    angle = frame
+    x = orbital_radius * math.cos(math.radians(angle))
+    y = orbital_radius * math.sin(math.radians(angle))
+
+    satellite.set_data([x], [y])
+
+    return satellite,
+
+ani = animation.FuncAnimation(
+    fig,
+    update,
+    frames=range(360),
+    interval=14,
+    blit=True
+)
+
+# Set graph appearance
+ax.set_xlim(-10000, 10000)
+ax.set_ylim(-10000, 10000)
+ax.set_aspect("equal")
+
+ax.set_title("SpaceSatellites - Orbital Tracking")
+ax.set_xlabel("X Position (km)")
+ax.set_ylabel("Y Position (km)")
+ax.legend()
+ax.grid()
+
+plt.show()
