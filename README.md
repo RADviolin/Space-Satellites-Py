@@ -5,7 +5,7 @@ This is my final project for a Python class. I want to:
 - Add satellites to a 2D diagram of Earth and view their orbital path, adjust speeds and locations, and show positioning.
 - I will also try to use Matplotlib and evaluate/display historic close approaches.
 - I want to look at objects that pass within a chosen distance threshold.
-- While I did brainstorm using chatgpt to come up with the concept, I did not use it in development or the build of this project. 
+
 
 
 <img width="757" height="626" alt="image" src="https://github.com/user-attachments/assets/7a78b4a0-189a-4693-8c42-43f6f70bd727" />
