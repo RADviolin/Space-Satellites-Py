@@ -11,8 +11,8 @@ This is my final project for a Python class. I want to:
 <img width="757" height="626" alt="image" src="https://github.com/user-attachments/assets/7a78b4a0-189a-4693-8c42-43f6f70bd727" />
 
 
-For simplicity, I'm considering the satellite to be a circle and using example values: orbital radius = 8500 km
-angle = 120
+For simplicity, I'm considering the satellite to be a circle and using example values: orbital radius = 6500 km
+angle = 97
 
 and basic trig concepts: 
 x = r cos(theta)
