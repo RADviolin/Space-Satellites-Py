@@ -27,6 +27,7 @@ y = r sin(theta)
 - theta = satellite's angle around Earth
 - x and y = satellite's position
 
+Fictional satellites are named "SKZ" and "jiniret".
 
 Image is of my first visualization, 2D Earth, using NumPy and MatPlotLib
 
