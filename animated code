@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 orbital_radius = 10000
 angle = 97
 
+satellite_name = "SKZ"
+
 # Calculate satellite position
 x = orbital_radius * math.cos(math.radians(angle))
 y = orbital_radius * math.sin(math.radians(angle))
@@ -14,7 +16,10 @@ y = orbital_radius * math.sin(math.radians(angle))
 # Draw Earth
 earth = plt.Circle((0, 0), 6371, color="blue", label="Earth")
 
-fig, ax = plt.subplots()
+fig, (ax, info_ax) = plt.subplots(
+    1, 2, figsize=(12, 6),
+    gridspec_kw={"width_ratios": [2, 1]}
+)
 
 ax.add_patch(earth)
 
@@ -32,7 +37,18 @@ def update(frame):
     angle = frame
     x = orbital_radius * math.cos(math.radians(angle))
     y = orbital_radius * math.sin(math.radians(angle))
+    altitude = orbital_radius - 6371
 
+    info_ax.clear()
+    info_ax.axis("off")
+
+    info_ax.text(0, 0.9, "SATELLITE STATUS", fontsize=14, weight="bold")
+    info_ax.text(0, 0.75, f"Name: {satellite_name}")
+    info_ax.text(0, 0.65, f"Orbital Radius: {orbital_radius} km")
+    info_ax.text(0, 0.55, f"Altitude: {altitude} km")
+    info_ax.text(0, 0.45, f"Angle: {angle} degrees")
+    info_ax.text(0, 0.35, f"X Position: {x:.1f} km")
+    info_ax.text(0, 0.25, f"Y Position: {y:.1f} km")
     satellite.set_data([x], [y])
 
     return satellite,
