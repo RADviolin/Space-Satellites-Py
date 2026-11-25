@@ -5,7 +5,7 @@ This is my final project for a Python class. I want to:
 - Add satellites to a 2D diagram of Earth and view their orbital path, adjust speeds and locations, and show positioning.
 - I will also try to use Matplotlib and evaluate/display historic close approaches.
 - I want to look at objects that pass within a chosen distance threshold.
-- This will also create an alert when 2 satellites are in colse proximity.
+- Hopefully, it will result in a working two-satellite simulation with tracking and monitoring, and alert when in close proximity.
 
 
 <img width="782" height="680" alt="image" src="https://github.com/user-attachments/assets/08514e81-8301-4cf2-8cc2-f7c66f7a00c1" />
