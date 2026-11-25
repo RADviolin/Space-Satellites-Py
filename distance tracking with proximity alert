@@ -1,0 +1,137 @@
+
+import matplotlib.animation as animation
+import math
+import matplotlib.pyplot as plt
+
+# Satellite information
+orbital_radius = 10000
+angle = 97
+
+satellite_name = "SKZ"
+
+# Second satellite
+jiniret_radius = 8500
+jiniret_angle = 180
+jiniret_speed = 1.5
+jiniret_name = "Jiniret"
+
+proximity_threshold = 2000
+minimum_distance = float("inf")
+
+# Calculate satellite position
+x = orbital_radius * math.cos(math.radians(angle))
+y = orbital_radius * math.sin(math.radians(angle))
+
+# Draw Earth
+earth = plt.Circle((0, 0), 6371, color="blue", label="Earth")
+
+fig, (ax, info_ax) = plt.subplots(
+    1, 2, figsize=(12, 6),
+    gridspec_kw={"width_ratios": [2, 1]}
+)
+
+ax.add_patch(earth)
+
+# Draw satellite orbit
+orbit = plt.Circle((0, 0), orbital_radius,
+                   fill=False, color="purple",
+                    linestyle="--")
+
+ax.add_patch(orbit)
+
+jiniret_orbit = plt.Circle(
+    (0, 0),
+    jiniret_radius,
+    fill=False,
+    color="green",
+    linestyle="--"
+)
+
+ax.add_patch(jiniret_orbit)
+
+# Draw satellite
+satellite, = ax.plot([], [], "ro", markersize=8, label="Satellite")
+jiniret, = ax.plot([], [], "go", markersize=8, label="Jiniret")
+
+def update(frame):
+    angle = 97 + frame * 2
+    x = orbital_radius * math.cos(math.radians(angle))
+    y = orbital_radius * math.sin(math.radians(angle))
+    altitude = orbital_radius - 6371
+
+    info_ax.clear()
+    info_ax.axis("off")
+
+    info_ax.text(0, 0.9, "SATELLITE STATUS", fontsize=14, weight="bold")
+    info_ax.text(0, 0.75, f"Name: {satellite_name}")
+    info_ax.text(0, 0.65, f"Orbital Radius: {orbital_radius} km")
+    info_ax.text(0, 0.55, f"Altitude: {altitude} km")
+    info_ax.text(0, 0.45, f"Angle: {angle} degrees")
+    info_ax.text(0, 0.35, f"X Position: {x:.1f} km")
+    info_ax.text(0, 0.25, f"Y Position: {y:.1f} km")
+    satellite.set_data([x], [y])
+
+    jiniret_current_angle = jiniret_angle + frame * jiniret_speed
+
+    jiniret_x = jiniret_radius * math.cos(
+        math.radians(jiniret_current_angle)
+    )
+
+    jiniret_y = jiniret_radius * math.sin(
+        math.radians(jiniret_current_angle)
+    )
+
+    jiniret.set_data([jiniret_x], [jiniret_y])
+
+    distance = math.sqrt(
+        (jiniret_x - x)**2 +
+        (jiniret_y - y)**2
+    )
+
+    global minimum_distance
+
+    if distance < minimum_distance:
+        minimum_distance = distance
+
+    if distance < proximity_threshold:
+        info_ax.text(
+            0, 0.05,
+            "PROXIMITY ALERT!",
+            color="red",
+            fontsize=14,
+            weight="bold"
+        )
+
+    info_ax.text(
+        0, 0.15,
+        f"Distance between satellites: {distance:.2f} km"
+    )
+
+    info_ax.text(
+        0, -0.05,
+        f"Closest Distance: {minimum_distance:.2f} km"
+    )
+
+    return satellite, jiniret,
+
+ani = animation.FuncAnimation(
+    fig,
+    update,
+    frames=range(720),
+    repeat=True,
+    interval=20,
+    blit=False
+)
+
+# Set graph appearance
+ax.set_xlim(-10000, 10000)
+ax.set_ylim(-10000, 10000)
+ax.set_aspect("equal")
+
+ax.set_title("SpaceSatellites - Orbital Tracking")
+ax.set_xlabel("X Position (km)")
+ax.set_ylabel("Y Position (km)")
+ax.legend()
+ax.grid()
+
+plt.show()
